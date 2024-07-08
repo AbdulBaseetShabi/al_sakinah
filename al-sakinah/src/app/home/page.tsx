@@ -1,120 +1,88 @@
+import { Metadata } from "next";
 import PageLayoutComponent from "../common/page-layout";
 import PageHeader from "../common/header";
-import WelcomeContent from "./welcome";
 import Button from "../common/button";
-import { parse, isBefore, isPast } from "date-fns";
+import MissionVision from "../common/missionxvision";
+import HorizontalLine from "../common/horizontal-line";
+import WelcomeContent from "./welcome";
 
-interface MissionAndVisionCardProp {
-  title: string;
-  description: string;
-  image: string;
-}
-
-const missionAndVision: MissionAndVisionCardProp[] = [
-  {
-    title: "Mission",
-    description:
-      " By fostering brave spaces with BIPOC Muslims, we seek to facilitate open dialogue through the co-contribution of knowledge and lived experiences to support personal and spiritual growth and foster community building.",
-    image: "./rocket.png",
-  },
-  {
-    title: "Vision",
-    description:
-      "A united and thriving community that serves as an intellectual hub to promote the holistic well-being of BIPOC Muslims in the KW region.",
-    image: "./binoculars.png",
-  },
-];
-
-export const SpecialCard: React.FC<MissionAndVisionCardProp> = ({
-  title,
-  description,
-  image,
-}) => {
-  return (
-    <div className="w-1/2 min-w-96  px-4 py-2 grow glass">
-      <PageHeader headerText={title} />
-      <div
-        style={{ width: "80px", height: "80px", backgroundColor: "#3A3042" }}
-        className="shadow-lg rounded-full mx-auto"
-      >
-        <img src={image} style={{ objectFit: "contain" }}></img>
-      </div>
-      <p>{description}</p>
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Al-Sakinah Institute - Home",
+  description: 'Homepage for Al-Sakinah Institute'
 };
 
 const Home = () => {
-  const { title, description, location, startTime, endTime, ...others } = {
-    date: "12/09/2023",
-    title: "Till Death Do Us Apart",
-    description:
-      "Join us for this talk with shaykh Usman to learn more about what exactly makes someone ready to embark on this journey of courtship and marriage, in addition to reminding ourselves of the islamic purpose(s) of this sacred union!",
-    location: "Kitchener Masjid",
-    startTime: "7:00 pm",
-    endTime: "9:00 pm",
-    imageUrl:
-      "https://cdn.pixabay.com/photo/2020/05/26/18/22/lantern-5224200_1280.png",
-  };
-
-  const date = parse(
-    `${others.date} ${endTime}`,
-    "dd/MM/yyyy hh:mm aaa",
-    new Date()
-  );
-  const eventDuration = `${date.toLocaleDateString("en-us", {
-    month: "long",
-    day: "2-digit",
-    year: "numeric",
-  })} @ ${startTime} - ${endTime}`;
-
   return (
     <main>
       <PageLayoutComponent>
         <div>
           {/* Welcome */}
           <div
-            className="flex justify-center items-center bg-"
+            className="flex justify-center items-center"
             style={{
               height: "calc(100vh - 64px)",
               backgroundImage:
-                'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("https://download.unsplash.com/photo-1428604467652-115d9d71a7f1")',
+                'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("/barley.png")',
               backgroundSize: "cover",
             }}
           >
             <WelcomeContent />
           </div>
+          <HorizontalLine />
+          {/* Mission */}
+          <MissionVision isLarge={true} />
+          <HorizontalLine />
 
-          {/* Mission & Vision */}
-          {/* <div>
-            {missionAndVision.map((info, index) => (
-              <div key={index}>
-                <SpecialCard {...info} />
+          {/* Latest News */}
+          <div>
+            <PageHeader headerText="Latest News" />
+            <div className="flex flex-wrap justify-center gap-4 mx-auto">
+              <div className="flex px-4 py-2 card glass shadow-lg border justify-center max-w-sm  box-border">
+                <p className="text-7xl text-center">🙌</p>
+                <p className="font-extralight text-lg mt-2">
+                  JazakaAllahu Khair for attending our last event! Without your
+                  continued support Al-Sakinah would not be were it is today.
+                </p>
+                <p className="italic mt-2">
+                  Love your truly, <br />
+                  the Al-Sakinah Institute team
+                </p>
               </div>
-            ))}
-          </div> */}
-          <div style={{ backgroundColor: "#0C0C0C", color: "white" }}>
-            <PageHeader headerText="Next Event" textColor="white" />
-            <div className="flex flex-wrap justify-center gap-4">
-              <div
-                style={{
-                  width: "400px",
-                  height: "400px",
-                  backgroundColor: "red",
-                  border: "2px solid white",
-                }}
-              >
-                <img src="./next_event.png" alt="Next Event" />
-              </div>
-              <div
-                style={{ width: "500px", height: "500px" }}
-                className="flex flex-col	justify-center"
-              >
-                <p className="mt-2">{description}</p>
-                <div className="w-full mt-3 max-w-96 self-end">
-                  <Button text="Sign Up" />
+
+              <div className="px-4 py-2 card glass shadow-lg border max-w-sm box-border">
+                <div
+                  style={{
+                    width: "22rem",
+                    height: "22rem",
+                  }}
+                  className="mx-auto"
+                >
+                  <img src="./next_event.png" alt="Next Event" />
+                </div>
+                <hr className="border my-4" />
+                <div>
+                  <Button text="Sign Up" link="" />
                 </div>
               </div>
+            </div>
+          </div>
+
+          <HorizontalLine />
+          {/* Subscribe */}
+          <div
+            className="bg-[#CF9C4F] card w-1/2 shadow-lg mx-auto p-4 mt-4 border-box"
+            style={{ minWidth: "384px" }}
+          >
+            <PageHeader
+              headerText="Subscribe To Our Mailing List"
+              removeSpacing={true}
+            />
+            <p className="text-center text-lg font-extralight">
+              Subscribe to our mailing list to keep up to date with our event
+              and get additional content
+            </p>
+            <div className="w-1/2 mx-auto mt-2">
+              <Button text="Subscribe" link="" />
             </div>
           </div>
         </div>

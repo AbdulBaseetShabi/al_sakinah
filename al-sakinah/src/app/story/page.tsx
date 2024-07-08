@@ -1,18 +1,19 @@
 import React from "react";
+import { Metadata } from "next";
 import PageLayoutComponent from "../common/page-layout";
 import PageHeader from "../common/header";
-import Impact from "./impact";
+import MissionVision from "../common/missionxvision";
+import Values from "./values";
 
-const story = [
-  "In fall 2022, the Somali-Muslim community in Kitchener, Ontario, was deeply impacted by tragic gun violence, resulting in the loss of young Black Muslim men. These events profoundly affected the tight-knit community, prompting concerned members to unite and seek proactive solutions to prevent future tragedies.",
-  "Quickly, the conversation evolved from addressing immediate concerns to broader systemic issues. A few questions emerged: How can we create programs and spaces supporting those susceptible to such realities? Was there a warm and welcoming space dedicated to young BIPOC Muslims? In January 2023, Al-Sakinah Institute quickly found root in Kitchener, Ontario. Our programs span from educational initiatives to charitable activities and encompass community social events to cultivate brave space discussions and strengthen collective resilience.",
-  "Sakinah, meaning tranquillity and success, is founded on a commitment to the KW community. We aim to foster a haven for the youth in Kitchener, where unity, identity, and holistic well-being are the cornerstones to fostering a resilient community.",
-];
+export const metadata: Metadata = {
+  title: "Al-Sakinah Institute - About Us",
+  description: 'About us page for Al-Sakinah Institute where you can view the history, mission and vision statement and core values of Al-Sakinah Institute.'
+};
 
 const Story = () => {
   return (
     <PageLayoutComponent>
-      <div>
+      <div className="w-full md:w-11/12 mx-auto">
         <div>
           <PageHeader headerText="The AlSakinah Story" />
           <div className="px-2 mx-auto">
@@ -95,9 +96,14 @@ const Story = () => {
             </ul>
           </div>
         </div>
-        <Impact />
+        <hr className="w-1/4 mx-auto my-4 max-w-md"/>
+        {/* Mission & Vision */}
+        <MissionVision />
+        <hr className="w-1/4 mx-auto my-4 max-w-md"/>
+        {/* Core Values */}
         <div>
           <PageHeader headerText="Core Values" />
+          <Values />
         </div>
       </div>
     </PageLayoutComponent>

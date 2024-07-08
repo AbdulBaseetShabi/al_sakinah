@@ -23,7 +23,7 @@ const ResourceCard: React.FC<ResourceCardProps> = ({
   link,
   name,
 }) => (
-  <div className="flex gap-1 border p-4 card glass shadow-md">
+  <div className="flex gap-1 border p-4 card shadow-md">
     <div className="flex flex-col">
       <h2 className="mb-1 font-extrabold">{name}</h2>
       <p>{description}</p>

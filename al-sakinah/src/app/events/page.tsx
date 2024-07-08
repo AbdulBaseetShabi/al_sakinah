@@ -1,7 +1,9 @@
 import PageHeader from "../common/header";
 import PageLayoutComponent from "../common/page-layout";
-import { parse, isBefore, isPast } from "date-fns";
+import { parse, isPast } from "date-fns";
 import Button from "../common/button";
+import Past from "./past";
+import { Metadata } from "next";
 
 interface Event {
   title: string;
@@ -18,6 +20,11 @@ interface EventComponentProps extends Omit<Event, "date"> {
   isPastEvent?: boolean;
   showDivider?: boolean;
 }
+
+export const metadata: Metadata = {
+  title: "Al-Sakinah Institute - Events",
+  description: 'Events page for Al-Sakinah Institute where you can view the upcoming and past events ran by Al-Sakinah Institute.'
+};
 
 export const events: Event[] = [
   {
@@ -106,7 +113,6 @@ export const EventComponent: React.FC<EventComponentProps> = ({
 
 const Events = () => {
   const upcomingEvents: EventComponentProps[] = [];
-  const pastEvents: EventComponentProps[] = [];
 
   events.forEach((event) => {
     const parsedEventDate = parse(
@@ -116,13 +122,7 @@ const Events = () => {
     );
     const hasEventPassed = isPast(parsedEventDate);
 
-    if (hasEventPassed) {
-      pastEvents.push({
-        ...event,
-        isPastEvent: true,
-        date: parsedEventDate,
-      });
-    } else {
+    if (!hasEventPassed) {
       upcomingEvents.push({
         ...event,
         isPastEvent: false,
@@ -145,16 +145,7 @@ const Events = () => {
               ))}
             </ul>
           </div>
-          <div>
-            <PageHeader headerText="Past Events" />
-            <ul>
-              {pastEvents.map((event, index) => (
-                <li key={index}>
-                  <EventComponent {...event} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          <Past/>
         </div>
       </main>
     </PageLayoutComponent>

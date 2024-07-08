@@ -1,7 +1,12 @@
+import Button from "../common/button";
+import HorizontalLine from "../common/horizontal-line";
+
 interface PartnerServiceCardProps {
   partnerName: string;
   services: string[];
+  description: string;
   partnerLogo?: string;
+  needsDarkBackground?: boolean;
   partnerEmail: string;
   partnerNumber: string;
   partnerSocials: string[];
@@ -9,16 +14,36 @@ interface PartnerServiceCardProps {
 
 const partnerServices: PartnerServiceCardProps[] = [
   {
-    partnerName: "UW MSA 1",
+    partnerName: "Kitchener Masjid",
+    description: "",
     services: ["Mentorship", "Friendship", "Therapy"],
     partnerEmail: "inquiry@uwmsa.ca",
     partnerNumber: "+1 (226) 505 8989",
-    partnerLogo:
-      "https://cdn.pixabay.com/photo/2023/06/28/22/00/tiger-8095253_1280.png",
+    partnerLogo: "kitchener_masjid.png",
     partnerSocials: ["https://www.instagram.com/uwmsa"],
   },
   {
-    partnerName: "UW MSA 2",
+    partnerName: "Al-Salaam Islamic Centre",
+    description: "",
+    services: ["Mentorship", "Friendship", "Therapy"],
+    partnerEmail: "inquiry@uwmsa.ca",
+    partnerNumber: "+1 (226) 505 8989",
+    partnerLogo: "al-salam.png",
+    needsDarkBackground: true,
+    partnerSocials: ["https://www.instagram.com/uwmsa"],
+  },
+  {
+    partnerName: "University of Waterloo MSA",
+    description: "",
+    services: ["Mentorship", "Friendship", "Therapy"],
+    partnerEmail: "inquiry@uwmsa.ca",
+    partnerNumber: "+1 (226) 505 8989",
+    partnerLogo: "uwmsa.avif",
+    partnerSocials: ["https://www.instagram.com/uwmsa"],
+  },
+  {
+    partnerName: "University of Waterloo Palestine",
+    description: "",
     services: ["Mentorship", "Friendship", "Therapy"],
     partnerEmail: "inquiry@uwmsa.ca",
     partnerNumber: "+1 (226) 505 8989",
@@ -26,16 +51,17 @@ const partnerServices: PartnerServiceCardProps[] = [
     partnerSocials: ["https://www.instagram.com/uwmsa"],
   },
   {
-    partnerName: "UW MSA 3",
+    partnerName: "University of Waterloo Somalia Student Association",
+    description: "",
     services: ["Mentorship", "Friendship", "Therapy"],
     partnerEmail: "inquiry@uwmsa.ca",
     partnerNumber: "+1 (226) 505 8989",
-    partnerLogo:
-      "https://cdn.pixabay.com/photo/2023/06/28/22/00/tiger-8095253_1280.png",
+    partnerLogo: "uwssa.jpg",
     partnerSocials: ["https://www.instagram.com/uwmsa"],
   },
   {
-    partnerName: "UW MSA 4",
+    partnerName: "Palestinian Youth Movement",
+    description: "",
     services: ["Mentorship", "Friendship", "Therapy"],
     partnerEmail: "inquiry@uwmsa.ca",
     partnerNumber: "+1 (226) 505 8989",
@@ -43,28 +69,22 @@ const partnerServices: PartnerServiceCardProps[] = [
     partnerSocials: ["https://www.instagram.com/uwmsa"],
   },
   {
-    partnerName: "UW MSA 5",
+    partnerName: "Wilfrid Laurier University MSA",
+    description: "",
     services: ["Mentorship", "Friendship", "Therapy"],
     partnerEmail: "inquiry@uwmsa.ca",
     partnerNumber: "+1 (226) 505 8989",
-    partnerLogo:
-      "https://cdn.pixabay.com/photo/2023/06/28/22/00/tiger-8095253_1280.png",
+    partnerLogo: "wlumsa.webp",
     partnerSocials: ["https://www.instagram.com/uwmsa"],
   },
   {
-    partnerName: "UW MSA 6",
+    partnerName: "University of Guelph MSA",
+    description: "",
     services: ["Mentorship", "Friendship", "Therapy"],
     partnerEmail: "inquiry@uwmsa.ca",
     partnerNumber: "+1 (226) 505 8989",
-    partnerLogo: "",
-    partnerSocials: ["https://www.instagram.com/uwmsa"],
-  },
-  {
-    partnerName: "UW MSA 7",
-    services: ["Mentorship", "Friendship", "Therapy"],
-    partnerEmail: "inquiry@uwmsa.ca",
-    partnerNumber: "+1 (226) 505 8989",
-    partnerLogo: "",
+    partnerLogo: "uogmsa.png",
+    needsDarkBackground: true,
     partnerSocials: ["https://www.instagram.com/uwmsa"],
   },
 ];
@@ -75,26 +95,33 @@ const Information: React.FC<{ info: string }> = ({ info }) => (
 
 const PartnerServiceCard: React.FC<PartnerServiceCardProps> = ({
   partnerName,
-  partnerEmail,
   partnerLogo,
-  partnerSocials,
-  partnerNumber,
-  services,
+  needsDarkBackground,
 }) => {
   return (
     <div className="border box-content p-4 shadow-lg bg-white">
       {partnerLogo && (
-        <img
-          className="roundered mx-auto"
-          width={120}
-          src={partnerLogo}
-          alt={partnerName}
-        />
+        <div>
+          <img
+            className="roundered mx-auto mb-2"
+            width={120}
+            src={`/partners/${partnerLogo}`}
+            alt={partnerName}
+            style={{
+              backgroundColor: `${
+                needsDarkBackground ? "#3A3042" : "transparent"
+              }`,
+            }}
+          />
+        </div>
       )}
       <div>
-        <div className="max-w-fit mx-auto mb-4">
-          <h3 className="text-center font-semibold text-lg">{partnerName}</h3>
+        <div className="max-w-fit mx-auto">
+          <h3 className="text-center font-semibold text-lg uppercase">
+            {partnerName}
+          </h3>
         </div>
+        <HorizontalLine />
         <p
           style={{
             fontWeight: "100",
@@ -103,8 +130,11 @@ const PartnerServiceCard: React.FC<PartnerServiceCardProps> = ({
           Call/Text available 7 days of the week 12pm-9pm for spiritual health,
           mental health, drug abuse, etc....
         </p>
-        <hr className="w-1/2 mx-auto border my-5" />
-        <div style={{ fontWeight: "300" }}>
+        <HorizontalLine />
+        <div className="max-w-sm mx-auto">
+          <Button text="Contact" link="" />
+        </div>
+        {/* <div style={{ fontWeight: "300" }}>
           <p>
             <Information info="Services" /> {services.join(", ")}
           </p>
@@ -115,27 +145,20 @@ const PartnerServiceCard: React.FC<PartnerServiceCardProps> = ({
           <p>
             <Information info="Number" /> {partnerNumber}
           </p>
-        </div>
-        <div>
-          {/* {
+        </div> */}
+        {/* <div>
+          {
                   partnerSocials.map((social, index) => (
                       <SocialIcon key={index} url={social} />
                   ))
-              } */}
-        </div>
+              }
+        </div> */}
       </div>
     </div>
   );
 };
 
 const Partners = () => {
-  <div className="flex flex-wrap mt-4">
-    {partnerServices.map((service, index) => (
-      <div key={index} className="mt-2 w-full max-w-96 mx-auto">
-        <PartnerServiceCard {...service} />
-      </div>
-    ))}
-  </div>;
   return (
     <div>
       <PartnersLarge />
@@ -149,8 +172,8 @@ const PartnersLarge = () => {
   const remainingItems = partnerServices.length % 3;
 
   return (
-    <div className="hidden lg:flex flex-wrap ustify-evenly">
-      <div className="grow basis-96">
+    <div className="hidden lg:flex flex-wrap justify-evenly">
+      <div className="grow basis-96 mx-2">
         {partnerServices
           .slice(0, itemPerColumn + (remainingItems > 0 ? 1 : 0))
           .map((service, index) => (
@@ -159,7 +182,7 @@ const PartnersLarge = () => {
             </div>
           ))}
       </div>
-      <div className="grow basis-96">
+      <div className="grow basis-96 mx-2">
         {partnerServices
           .slice(
             itemPerColumn + (remainingItems > 0 ? 1 : 0),
@@ -173,7 +196,7 @@ const PartnersLarge = () => {
             </div>
           ))}
       </div>
-      <div className="grow basis-96">
+      <div className="grow basis-96 mx-2">
         {partnerServices
           .slice(
             2 * itemPerColumn +
@@ -196,24 +219,18 @@ const PartnersMedium = () => {
   return (
     <div className="flex lg:hidden flex-wrap justify-evenly">
       <div>
-        {partnerServices
-          .slice(0, itemPerColumn)
-          .map((service, index) => (
-            <div key={index} className="mt-2 w-full mx-auto">
-              <PartnerServiceCard {...service} />
-            </div>
-          ))}
+        {partnerServices.slice(0, itemPerColumn).map((service, index) => (
+          <div key={index} className="mt-2 w-full mx-auto">
+            <PartnerServiceCard {...service} />
+          </div>
+        ))}
       </div>
       <div>
-        {partnerServices
-          .slice(
-            itemPerColumn
-          )
-          .map((service, index) => (
-            <div key={index} className="mt-2 w-full mx-auto">
-              <PartnerServiceCard {...service} />
-            </div>
-          ))}
+        {partnerServices.slice(itemPerColumn).map((service, index) => (
+          <div key={index} className="mt-2 w-full mx-auto">
+            <PartnerServiceCard {...service} />
+          </div>
+        ))}
       </div>
     </div>
   );
