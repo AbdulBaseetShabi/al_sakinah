@@ -88,13 +88,7 @@ export const EventComponent: React.FC<EventComponentProps> = ({
           </div>
           <div className="w-full font-bold">{date.getDate()}</div>
         </div>
-        <div
-          style={{
-            width: "calc(100% - 150px)",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+        <div className="flex flex-col w-1/2 grow">
           <div className="font-light">{eventDuration}</div>
           <div className="font-bold">{title}</div>
           <p className="font-light italic">{location}</p>

@@ -1,8 +1,9 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import Button from "./button";
 import HorizontalLine from "./horizontal-line";
+import Logo from "./logo";
 
 const QUICK_DONATION_LINK =
   "https://www.paypal.com/donate/?hosted_button_id=26A2M76SX392C";
@@ -36,11 +37,12 @@ const routes: Route[] = [
   //   label: "Contact Us",
   // },
 ];
+
 const NavigationLargeScreen: React.FC<{}> = ({}) => {
   return (
     <div className="navbar hidden lg:flex">
       <div className="navbar-start">
-        <Link href="/home">Al Sakinah Logo</Link>
+        <Logo />
       </div>
       <div className="navbar-center flex">
         <ul className="menu menu-horizontal px-1">
@@ -63,7 +65,7 @@ const NavigationSmallScreen: React.FC<{}> = ({}) => {
   return (
     <div className="navbar flex lg:hidden justify-between">
       <div className="navbar-center">
-        <Link href="/home">Al Sakinah Logo</Link>
+        <Logo />
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
